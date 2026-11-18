@@ -1,0 +1,38 @@
+
+# Python cache
+__pycache__/
+*.py[cod]
+
+# Virtual environments
+.venv/
+venv/
+ml_ids_venv/
+
+# Environment variables and secrets
+.env
+.env.*
+!.env.example
+
+# Local datasets
+data/
+*.pcap
+*.pcapng
+
+# Generated prediction results
+exports/
+
+# Trained model files
+models/*.joblib
+models/*.pkl
+
+# Temporary files and backups
+*_backup.py
+*_backup_safe.py
+*.log
+*.tmp
+
+# Editor and system files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

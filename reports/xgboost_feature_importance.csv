@@ -1,0 +1,79 @@
+Feature,Importance
+Bwd Packet Length Std,0.2630642
+Average Packet Size,0.17949621
+Avg Bwd Segment Size,0.11325983
+Max Packet Length,0.10935699
+Bwd Header Length,0.061821368
+Fwd Packet Length Max,0.03239588
+Packet Length Std,0.023886213
+Bwd Packet Length Mean,0.017429598
+Fwd Packet Length Std,0.014047403
+Total Backward Packets,0.01355918
+Total Length of Bwd Packets,0.013191748
+Total Fwd Packets,0.01248766
+Subflow Bwd Bytes,0.012287876
+Destination Port,0.010641727
+Flow IAT Mean,0.006882973
+Packet Length Mean,0.0065066353
+Avg Fwd Segment Size,0.005493005
+Bwd Packet Length Max,0.0054347306
+min_seg_size_forward,0.005312148
+Bwd Packet Length Min,0.004791111
+Fwd Header Length,0.0046909065
+Flow Bytes/s,0.0044873683
+Fwd Packets/s,0.004306521
+Fwd IAT Min,0.0042126207
+Flow IAT Std,0.003842737
+Init_Win_bytes_forward,0.0038042604
+Bwd Packets/s,0.0037091682
+Active Std,0.0033818681
+Idle Mean,0.003324265
+Init_Win_bytes_backward,0.0031273232
+Bwd IAT Std,0.003112054
+FIN Flag Count,0.0030293474
+Subflow Fwd Bytes,0.0028222348
+Fwd Header Length.1,0.0027705135
+URG Flag Count,0.0024104042
+Fwd IAT Mean,0.002358401
+Total Length of Fwd Packets,0.0022976955
+Fwd IAT Std,0.0021170916
+Fwd IAT Total,0.0021001885
+PSH Flag Count,0.0020214517
+Idle Min,0.001858299
+Bwd IAT Mean,0.0017426979
+Fwd IAT Max,0.0016871619
+Flow IAT Min,0.0016001931
+Bwd IAT Min,0.0015514577
+ACK Flag Count,0.0014386408
+Min Packet Length,0.0014080191
+Flow Duration,0.0013293459
+Idle Std,0.0012672591
+Idle Max,0.0011561528
+Fwd Packet Length Min,0.001131835
+Active Mean,0.0010110623
+Flow IAT Max,0.0010095134
+Subflow Fwd Packets,0.00094973797
+Packet Length Variance,0.0008025785
+Fwd Packet Length Mean,0.00068506703
+Flow Packets/s,0.00067363196
+Active Min,0.00061867107
+Fwd PSH Flags,0.00050091255
+Bwd IAT Total,0.00049206166
+SYN Flag Count,0.00036772326
+act_data_pkt_fwd,0.0003655766
+Subflow Bwd Packets,0.0003613683
+Bwd IAT Max,0.00026634254
+Down/Up Ratio,0.00022704958
+Active Max,0.00022464103
+RST Flag Count,0.0
+Bwd URG Flags,0.0
+Bwd PSH Flags,0.0
+Fwd URG Flags,0.0
+Bwd Avg Bulk Rate,0.0
+Bwd Avg Packets/Bulk,0.0
+Bwd Avg Bytes/Bulk,0.0
+Fwd Avg Bulk Rate,0.0
+Fwd Avg Packets/Bulk,0.0
+Fwd Avg Bytes/Bulk,0.0
+CWE Flag Count,0.0
+ECE Flag Count,0.0

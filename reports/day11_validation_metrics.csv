@@ -1,0 +1,2 @@
+Model,Accuracy,Precision,Recall,F1,True_Negatives,False_Positives,False_Negatives,True_Positives,False_Positive_Rate,False_Negative_Rate
+XGBoost,0.9987102480008844,0.9961530674225552,0.9967585089141004,0.9964556962025316,22182,19,16,4920,0.0008558173055267781,0.0032414910858995136

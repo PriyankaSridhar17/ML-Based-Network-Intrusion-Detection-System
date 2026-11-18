@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ML Network Intrusion Detection</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h1>ML-Based Network Intrusion Detection System</h1>
+
+        <p class="subtitle">
+            Intelligent Network Traffic Analysis using XGBoost
+        </p>
+
+        <div class="card">
+
+            <h2>Network Security Dashboard</h2>
+
+            <p>Machine Learning Model: XGBoost</p>
+
+            <h3>Upload Network Traffic CSV</h3>
+
+            <form method="POST" enctype="multipart/form-data">
+
+                <input type="file" name="file" accept=".csv" required>
+
+                <button type="submit">
+                    Analyze Network Traffic
+                </button>
+
+            </form>
+
+            {% if error %}
+            <div class="error">
+                {{ error }}
+            </div>
+            {% endif %}
+
+        </div>
+
+        {% if results %}
+
+        <div class="results">
+
+            <h2>Intrusion Detection Results</h2>
+
+            <div class="stats">
+
+                <div class="stat-card">
+                    <h3>Total Network Flows</h3>
+                    <p>{{ results.total }}</p>
+                </div>
+
+                <div class="stat-card benign">
+                    <h3>BENIGN Traffic</h3>
+                    <p>{{ results.benign }}</p>
+                    <span>{{ results.benign_percent }}%</span>
+                </div>
+
+                <div class="stat-card attack">
+                    <h3>ATTACK Traffic</h3>
+                    <p>{{ results.attacks }}</p>
+                    <span>{{ results.attack_percent }}%</span>
+                </div>
+
+            </div>
+
+            <h2>Network Traffic Distribution</h2>
+
+            <div class="chart-container">
+
+                <div class="donut-chart" role="img"
+                    aria-label="BENIGN {{ results.benign_percent }} percent, ATTACK {{ results.attack_percent }} percent"
+                    style="--benign-percent: {{ results.benign_percent }}%;">
+
+                    <div class="donut-center">
+                        <strong>{{ results.attack_percent }}%</strong>
+                        <span>Predicted ATTACK</span>
+                    </div>
+
+                </div>
+
+                <div class="chart-legend">
+                    <p>BENIGN: {{ results.benign_percent }}%</p>
+                    <p>ATTACK: {{ results.attack_percent }}%</p>
+                </div>
+
+            </div>
+
+            {% if results.attack_detected %}
+
+            <div class="security-alert">
+                <h3>Potential Attack Traffic Detected</h3>
+                <p>
+                    {{ results.attacks }} of {{ results.total }}
+                    network flows were classified as ATTACK.
+                </p>
+            </div>
+
+            {% else %}
+
+            <div class="safe-alert">
+                <h3>No Attack Traffic Predicted</h3>
+                <p>
+                    All analyzed flows were classified as BENIGN.
+                </p>
+            </div>
+
+            {% endif %}
+
+            {% if results.download_available %}
+
+            <a class="download-button" href="{{ url_for('download_results') }}">
+                Download Prediction Results CSV
+            </a>
+
+            {% endif %}
+
+            <p class="note">
+                These are machine learning predictions,
+                not confirmed security incidents.
+            </p>
+
+        </div>
+
+        {% endif %}
+
+    </div>
+
+</body>
+
+</html>
