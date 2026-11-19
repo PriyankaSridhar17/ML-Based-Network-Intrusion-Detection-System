@@ -186,6 +186,32 @@ Feature importance helps explain which network characteristics influence model p
 
 It does not establish that any individual feature causes a network attack.
 
+
+## Dashboard Screenshots
+
+The Flask dashboard analyzes uploaded network traffic CSV files using a trained XGBoost classifier.
+
+### Network Security Dashboard
+
+![Network Security Dashboard](screenshots/dashboard_home.png)
+
+### Intrusion Detection Results
+
+The example analysis classified 89 of 100 network flows as BENIGN and 11 as ATTACK.
+
+![Intrusion Detection Results](screenshots/prediction_results.png)
+
+### Potential Attack Detection Alert
+
+The dashboard displays potential attack alerts and supports downloading prediction results as CSV.
+
+![Potential Attack Alert](screenshots/attack_alert.png)
+
+**Note:** Predictions are not confirmed security incidents.
+
+---
+
+
 ## Flask Web Dashboard
 
 An interactive web application was developed using Flask.
