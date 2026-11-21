@@ -1,38 +1,87 @@
 
-# Python cache
+# ==========================================
+# ML-Based Network Intrusion Detection System
+# Git Ignore Configuration
+# ==========================================
+
+# Python cache and compiled files
 __pycache__/
 *.py[cod]
+*$py.class
 
 # Virtual environments
 .venv/
 venv/
+env/
 ml_ids_venv/
 
 # Environment variables and secrets
 .env
 .env.*
 !.env.example
+*.pem
+*.key
+secrets.json
 
-# Local datasets
+# Dataset files
 data/
-*.pcap
-*.pcapng
+*.parquet
 
-# Generated prediction results
+# Generated exports
 exports/
 
-# Trained model files
+# Trained machine learning models
 models/*.joblib
 models/*.pkl
+models/*.pickle
 
-# Temporary files and backups
-*_backup.py
-*_backup_safe.py
+# Automated testing
+.pytest_cache/
+.pytest_temp/
+.pytest_tmp/
+ids_test_*/
+.coverage
+.coverage.*
+htmlcov/
+coverage.xml
+.tox/
+.nox/
+
+# Local backup files
+app_day9_backup_safe.py
+*.bak
+
+# Python build files
+build/
+dist/
+*.egg-info/
+.eggs/
+
+# Temporary and log files
 *.log
 *.tmp
+*.temp
+*.swp
+*.swo
 
-# Editor and system files
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Editor configuration
 .vscode/
 .idea/
+
+# Operating system files
 .DS_Store
 Thumbs.db
+desktop.ini
+
+# Local application files
+instance/
+*.sqlite
+*.sqlite3
+*.db
+
+# Local development configuration
+config.local.py
+settings.local.py

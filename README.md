@@ -1,127 +1,186 @@
 
 # ML-Based Network Intrusion Detection System
 
-A machine learning-based Network Intrusion Detection System (NIDS) developed using Python, Scikit-learn, XGBoost, and Flask.
+A machine learning-based Network Intrusion Detection System (NIDS)
+developed using Python, Scikit-learn, XGBoost, and Flask.
 
-The project analyzes network traffic flow features and classifies traffic as **BENIGN** or **ATTACK**.
+The project analyzes network traffic flow features and classifies
+traffic as **BENIGN** or **ATTACK**.
 
-It includes data preprocessing, machine learning model comparison, performance evaluation, data leakage investigation, and an interactive web dashboard.
+It includes data preprocessing, machine learning model comparison,
+performance evaluation, automated testing, and an interactive
+Flask web dashboard.
 
-## Project Objectives
+**Project Status:** Functional local prototype with automated
+application testing completed.
 
-- Detect potentially malicious network traffic using machine learning.
-- Preprocess and analyze the CICIDS2017 dataset.
-- Train and compare Decision Tree, Random Forest, and XGBoost classifiers.
-- Evaluate models using accuracy, precision, recall, F1-score, and confusion matrices.
-- Investigate potential data leakage between training and testing datasets.
-- Develop a Flask dashboard for CSV-based network traffic analysis.
-- Display prediction statistics and export individual prediction results.
+**Author:** Priyanka Sridhar
 
-## Technologies Used
+**GitHub Repository:**
+https://github.com/PriyankaSridhar17/ML-Based-Network-Intrusion-Detection-System
 
-**Programming Language**
+---
+
+## 1. Project Overview
+
+Network Intrusion Detection Systems help identify potentially
+malicious activity by analyzing network traffic.
+
+This project uses supervised machine learning to classify
+network traffic records into two categories:
+
+- **BENIGN (0):** Traffic predicted to be legitimate.
+- **ATTACK (1):** Traffic predicted to be potentially malicious.
+
+The system analyzes pre-extracted network flow features
+from CSV files rather than capturing live network packets.
+
+Three machine learning classifiers were implemented and
+compared:
+
+1. Decision Tree
+2. Random Forest
+3. XGBoost
+
+XGBoost was selected as the project's best-performing
+baseline based on the saved evaluation results.
+
+A Flask web dashboard provides a user-friendly interface
+for uploading CSV files, reviewing predictions, and
+downloading results.
+
+---
+
+## 2. Project Objectives
+
+- Analyze network traffic using machine learning.
+- Prepare and clean the CICIDS2017 dataset.
+- Perform exploratory data analysis.
+- Train multiple classification algorithms.
+- Compare model performance.
+- Evaluate accuracy, precision, recall, and F1-score.
+- Analyze confusion matrices and feature importance.
+- Develop an interactive Flask dashboard.
+- Validate uploaded network traffic datasets.
+- Generate BENIGN and ATTACK predictions.
+- Export prediction results to CSV.
+- Implement automated application testing.
+- Publish documented project code on GitHub.
+
+---
+
+## 3. Technologies Used
+
+### Programming and Data Processing
+
 - Python
-
-**Data Processing**
 - Pandas
 - NumPy
 
-**Machine Learning**
+### Machine Learning
+
 - Scikit-learn
 - XGBoost
 - Joblib
 
-**Data Visualization**
+### Data Visualization
+
 - Matplotlib
 
-**Web Development**
+### Web Application
+
 - Flask
 - HTML
 - CSS
 
-**Development Tools**
+### Testing and Development
+
+- Pytest 9.2.0
+- Flask Test Client
 - Visual Studio Code
 - Git
 - GitHub
 
-## Dataset
+---
+
+## 4. Dataset
 
 **Dataset:** CICIDS2017
 
-**Source:** Canadian Institute for Cybersecurity, University of New Brunswick
+CICIDS2017 contains network traffic records representing
+benign network activity and several attack categories.
 
-**Official Dataset:**
-https://www.unb.ca/cic/datasets/ids-2017.html
+The dataset provides network flow characteristics that
+can be used for intrusion detection research.
 
-CICIDS2017 contains network traffic records representing benign activity and multiple categories of network attacks.
+### Dataset Sampling
 
-For this project, a 5% sample was collected from each source CSV file in chunks to reduce computational requirements.
+A 5% sample was collected from each source CSV file
+in processing chunks to reduce computational requirements.
 
-### Data Preparation
+### Data Preprocessing
 
-The preprocessing pipeline performs the following operations:
+The preprocessing workflow included:
 
-1. Load the original CICIDS2017 CSV files.
-2. Sample 5% of records from each processing chunk.
-3. Standardize column names.
-4. Convert network traffic features into numeric values.
-5. Replace infinite values with missing values.
-6. Remove records containing missing values.
-7. Convert original traffic labels into binary classes.
-8. Remove duplicate feature records.
-9. Split the cleaned dataset into training and testing sets.
-
-### Binary Classification
-
-- **0 - BENIGN:** Network traffic classified as legitimate.
-- **1 - ATTACK:** Network traffic classified as potentially malicious.
-
-All non-BENIGN labels are mapped to the ATTACK class.
+1. Loading source CSV files.
+2. Sampling network traffic records.
+3. Standardizing feature names.
+4. Converting features to numeric values.
+5. Replacing infinite values with missing values.
+6. Removing records containing missing values.
+7. Converting traffic labels into binary classes.
+8. Removing duplicate feature records.
+9. Splitting the cleaned dataset for model evaluation.
 
 ### Dataset Split
 
-| Dataset | Records |
-|---|---:|
-| Training | 108,547 |
-| Testing | 27,137 |
-| Total | 135,684 |
+| Property | Value |
+|---|---|
+| Training records | 108,547 |
+| Testing records | 27,137 |
+| Total records | 135,684 |
+| Training ratio | 80% |
+| Testing ratio | 20% |
+| Random state | 42 |
+| Split method | Stratified random row split |
 
-**Split Configuration**
-- Training: 80%
-- Testing: 20%
-- Random state: 42
-- Stratified random split
+The split preserves the approximate class distribution
+between the training and testing datasets.
 
-Stratification helps preserve the relative distribution of BENIGN and ATTACK records across the training and testing datasets.
+However, random row splitting does not guarantee
+independence between network capture sessions.
 
-However, random row splitting does not guarantee that related network sessions are separated.
+---
 
-## Machine Learning Models
+## 5. Machine Learning Models
 
-Three classification algorithms were implemented and compared.
+### Decision Tree
 
-### 1. Decision Tree
+A supervised learning algorithm that creates decision
+rules based on network traffic features.
 
-A tree-based classification algorithm that learns decision rules from network traffic features.
+### Random Forest
 
-### 2. Random Forest
+An ensemble learning algorithm that combines multiple
+decision trees to generate classifications.
 
-An ensemble learning algorithm that combines multiple decision trees to produce predictions.
+### XGBoost
 
-### 3. XGBoost
+A gradient-boosted tree algorithm used to classify
+network traffic based on learned feature patterns.
 
-An optimized gradient-boosted decision tree algorithm used for binary network traffic classification.
+XGBoost was selected as the best-performing baseline
+in the project's saved model comparison.
 
-XGBoost was selected as the project's best-performing baseline according to the recorded model comparison results.
+---
 
-The trained model uses 78 network traffic features.
+## 6. XGBoost Evaluation Results
 
-## XGBoost Evaluation Results
+The trained XGBoost classifier was evaluated using
+27,137 saved test records.
 
-The following results were calculated from the recorded confusion-matrix counts on the saved test dataset.
-
-| Metric | Result |
-|---|---:|
+| Evaluation Metric | Result |
+|---|---|
 | Accuracy | 99.87% |
 | Precision | 99.62% |
 | Recall | 99.68% |
@@ -130,49 +189,31 @@ The following results were calculated from the recorded confusion-matrix counts 
 | False Positives | 19 |
 | False Negatives | 16 |
 | True Positives | 4,920 |
-| Test Records | 27,137 |
 
-Precision, recall, and F1-score refer to the ATTACK class.
-
-These results represent performance on the sampled CICIDS2017 test split and should not be interpreted as verified performance on independent or live network traffic.
-
-### Confusion Matrix
-
-| Actual / Predicted | BENIGN | ATTACK |
-|---|---:|---:|
-| BENIGN | 22,182 | 19 |
-| ATTACK | 16 | 4,920 |
-
-**Confusion Matrix Explanation**
+### Confusion Matrix Interpretation
 
 - **True Negative:** BENIGN traffic correctly classified as BENIGN.
 - **False Positive:** BENIGN traffic incorrectly classified as ATTACK.
 - **False Negative:** ATTACK traffic incorrectly classified as BENIGN.
 - **True Positive:** ATTACK traffic correctly classified as ATTACK.
 
-False negatives are particularly important in intrusion detection because they represent potentially malicious traffic that the model failed to identify.
+False negatives are particularly important because
+they represent attack traffic that was not detected.
 
-### Performance Metrics
+### Evaluation Disclaimer
 
-**Accuracy**
+The reported metrics describe performance on the
+project's saved test dataset.
 
-Measures the percentage of all network traffic records classified correctly.
+They do not establish performance on live traffic,
+unseen capture sessions, or independent network environments.
 
-**Precision**
+---
 
-Measures how many records predicted as ATTACK were actually labeled ATTACK.
+## 7. Feature Importance Analysis
 
-**Recall**
-
-Measures how many actual ATTACK records were successfully identified.
-
-**F1-score**
-
-Combines precision and recall into a single metric.
-
-## Feature Importance
-
-XGBoost feature importance analysis was performed to identify influential network traffic characteristics.
+XGBoost feature importance analysis was performed
+to identify influential network traffic characteristics.
 
 Important features included:
 
@@ -182,530 +223,448 @@ Important features included:
 - Max Packet Length
 - Bwd Header Length
 
-Feature importance helps explain which network characteristics influence model predictions.
-
-It does not establish that any individual feature causes a network attack.
-
-
-## Dashboard Screenshots
-
-The Flask dashboard analyzes uploaded network traffic CSV files using a trained XGBoost classifier.
-
-### Network Security Dashboard
-
-![Network Security Dashboard](screenshots/dashboard_home.png)
-
-### Intrusion Detection Results
-
-The example analysis classified 89 of 100 network flows as BENIGN and 11 as ATTACK.
-
-![Intrusion Detection Results](screenshots/prediction_results.png)
-
-### Potential Attack Detection Alert
-
-The dashboard displays potential attack alerts and supports downloading prediction results as CSV.
-
-![Potential Attack Alert](screenshots/attack_alert.png)
-
-**Note:** Predictions are not confirmed security incidents.
+Feature importance helps explain model behavior but
+does not establish that a feature causes an attack.
 
 ---
 
+## 8. Flask Network Security Dashboard
 
-## Flask Web Dashboard
-
-An interactive web application was developed using Flask.
-
-The dashboard allows users to upload network traffic CSV files and analyze them using the trained XGBoost classifier.
+An interactive Flask application was developed
+to demonstrate network intrusion detection predictions.
 
 ### Dashboard Features
 
 - Upload network traffic CSV files.
 - Validate uploaded datasets.
-- Analyze traffic using the trained XGBoost model.
+- Analyze traffic using the trained XGBoost classifier.
 - Display total network flows.
-- Show BENIGN prediction counts.
-- Show ATTACK prediction counts.
-- Calculate prediction percentages.
+- Display BENIGN prediction counts.
+- Display ATTACK prediction counts.
+- Calculate traffic classification percentages.
 - Visualize network traffic distribution.
 - Display potential attack alerts.
-- Download individual prediction results as CSV.
-
-### Input Validation
-
-The application includes checks for:
-
-- Missing uploaded files
-- Unsupported file extensions
-- Empty datasets
-- Missing required model features
-- Duplicate column names
-- Nonnumeric feature values
-- Missing numerical values
-- Infinite numerical values
-- Oversized uploads
-- Excessive row counts
-
-**Application Limits**
-
-- Maximum request size: 10 MB
-- Maximum prediction rows: 50,000
-- Required network features: 78
-
-Uploaded CSV files must contain the required model features.
-
-The dashboard analyzes network flow records rather than raw network packets.
-
-### Prediction Results
-
-Each network flow is classified as:
-
-- BENIGN
-- ATTACK
-
-The dashboard displays summary statistics and a traffic distribution chart.
+- Download prediction results as CSV.
 
-If potentially malicious traffic is predicted, the application displays an alert.
+### Dashboard Input Limits
 
-These alerts are machine learning predictions and do not confirm that a security incident occurred.
+| Configuration | Limit |
+|---|---|
+| Maximum upload size | 10 MB |
+| Maximum rows per upload | 50,000 |
+| Required network features | 78 |
+| Supported upload format | CSV |
 
-### CSV Export
+### Dashboard Screenshots
 
-The application supports downloading prediction results.
+#### Dashboard Homepage
 
-The exported CSV includes:
+![Dashboard Homepage](screenshots/dashboard_home.png)
 
-- Original network traffic features
-- Predicted_Label
-- Predicted_Class
+#### Intrusion Detection Results
 
-**Predicted_Class Values**
+![Prediction Results](screenshots/prediction_results.png)
 
-- 0 = BENIGN
-- 1 = ATTACK
+#### Potential Attack Alert
 
-## Project Structure
+![Attack Alert](screenshots/attack_alert.png)
 
-```text
-ML_Network_IDS/
-|
-|-- app.py
-|-- main.py
-|-- explore_data.py
-|-- analyze_data.py
-|-- check_data_quality.py
-|-- count_attacks.py
-|
-|-- preprocess_data.py
-|-- split_data.py
-|
-|-- train_decision_tree.py
-|-- train_random_forest.py
-|-- train_xgboost.py
-|
-|-- compare_models.py
-|-- validate_model.py
-|-- check_data_leakage.py
-|
-|-- data/                     # Local datasets (excluded)
-|
-|-- models/                   # Trained models excluded
-|   |-- *.joblib
-|
-|-- reports/
-|   |-- day11_validation_metrics.csv
-|   |-- day11_data_leakage_report.csv
-|   |-- model_comparison.csv
-|   |-- model_comparison.png
-|   |-- xgboost_feature_importance.csv
-|   |-- xgboost_feature_importance.png
-|
-|-- exports/                  # Local prediction exports
-|
-|-- templates/
-|   |-- index.html
-|
-|-- static/
-|   |-- style.css
-|
-|-- README.md
-|-- requirements.txt
-|-- .gitignore
-```
+### Example Prediction Results
 
-Some directories and generated files are excluded from GitHub using `.gitignore`.
+A demonstration CSV containing 100 network traffic
+records produced the following predictions:
 
-## Installation and Setup
+| Prediction Category | Count | Percentage |
+|---|---:|---:|
+| BENIGN | 89 | 89.0% |
+| ATTACK | 11 | 11.0% |
+| Total | 100 | 100.0% |
 
-The following instructions describe how to configure and run the project locally.
+These values are predictions for the demonstration
+input and are not confirmed security incidents.
 
-### Prerequisites
+---
 
-Install:
+## 9. Input Validation
 
-- Python
-- Git
-- A Python-compatible terminal
-- Visual Studio Code (optional)
+The Flask application includes checks for:
 
-The project was developed using Python 3.13.
+- Missing uploaded files.
+- Unsupported file extensions.
+- Empty CSV datasets.
+- Missing required network features.
+- Duplicate column names.
+- Nonnumeric feature values.
+- Missing numerical values.
+- Infinite numerical values.
+- Oversized file uploads.
+- Excessive row counts.
 
-Package compatibility may depend on the installed Python version and operating system.
+Input validation reduces errors and helps prevent
+unsupported datasets from reaching the prediction stage.
 
-### Step 1 - Clone the Repository
+---
 
-```bash
-git clone https://github.com/PriyankaSridhar17/ML-Based-Network-Intrusion-Detection-System.git
-```
+## 10. Automated Flask Application Testing
 
-Navigate into the project directory:
+Automated application tests were implemented using
+**Pytest 9.2.0** and the **Flask test client**.
 
-```bash
-cd ML-Based-Network-Intrusion-Detection-System
-```
+The tests verify selected application behaviors
+without requiring a web browser.
 
-### Step 2 - Create a Virtual Environment
+### Automated Test Coverage
 
-```bash
-python -m venv .venv
-```
+| Test Case | Result |
+|---|---|
+| Homepage loading | PASSED |
+| Missing uploaded file | PASSED |
+| Unsupported file extension | PASSED |
+| Empty CSV upload | PASSED |
+| Missing required features | PASSED |
+| Nonnumeric feature values | PASSED |
+| Download without predictions | PASSED |
+| Oversized file upload | PASSED |
+| Successful prediction and CSV download | PASSED |
 
-### Step 3 - Activate the Virtual Environment
+### Day 14 Test Results
 
-Windows PowerShell:
+| Metric | Result |
+|---|---|
+| Total tests | 9 |
+| Passed | 9 |
+| Failed | 0 |
+| Errors | 0 |
+| Execution time | 4.82 seconds |
+| Testing framework | Pytest 9.2.0 |
 
-```powershell
-.\.venv\Scripts\Activate.ps1
-```
+All nine tests passed during the verified Day 14 test run.
 
-On macOS or Linux:
+### Prediction and Download Test
 
-```bash
-source .venv/bin/activate
-```
+The successful prediction test uses a controlled
+mock classifier to verify:
 
-### Step 4 - Install Dependencies
+1. Valid CSV upload.
+2. Processing of two network traffic records.
+3. Generation of BENIGN and ATTACK predictions.
+4. Successful prediction CSV download.
+5. Verification of exported prediction labels.
+6. Verification of exported prediction classes.
 
-```bash
-python -m pip install -r requirements.txt
-```
+The mock classifier returns known predictions to
+verify the application's processing workflow.
 
-This installs the Python packages required by the project.
+This test does not measure the accuracy of the
+trained XGBoost model.
 
-## Dataset Preparation and Model Training
+### Running Automated Tests
 
-The original CICIDS2017 dataset and trained model files are not included in this GitHub repository.
+From the project root directory, run:
 
-Users must obtain the dataset and generate the model locally.
+    python -m pytest tests/test_app.py -v --basetemp=".pytest_temp"
 
-### Step 1 - Download CICIDS2017
+Expected verified test count:
 
-Download the CICIDS2017 dataset from:
+    9 passed
 
-https://www.unb.ca/cic/datasets/ids-2017.html
+### Testing Limitations
 
-Obtain the MachineLearningCVE CSV files used for machine learning analysis.
+The automated tests cover selected Flask application
+behaviors.
 
-### Step 2 - Configure the Dataset Location
+They do not constitute a complete security audit,
+load test, or independent model evaluation.
 
-Open:
+Additional testing is recommended before deploying
+the application in a production environment.
 
-```text
-preprocess_data.py
-```
+---
 
-Locate the dataset directory configuration.
+## 11. Data Leakage Investigation
 
-Update the path to point to the local folder containing the original CICIDS2017 CSV files.
+Data leakage checks were performed to investigate
+possible overlap between training and testing records.
 
-For example:
-
-```python
-dataset_folder = Path(
-    r"C:\IDS_Datasets\MachineLearningCVE"
-)
-```
-
-This is an example path. Replace it with the actual dataset location.
-
-### Step 3 - Preprocess the Dataset
-
-Run:
-
-```bash
-python preprocess_data.py
-```
-
-The script:
-
-- Reads the source CSV files.
-- Samples network traffic records.
-- Cleans feature names.
-- Converts numerical features.
-- Removes invalid records.
-- Saves the cleaned sample.
-
-Expected output file:
-
-```text
-data/cleaned_sample.csv
-```
-
-### Step 4 - Create Training and Testing Datasets
-
-Run:
-
-```bash
-python split_data.py
-```
-
-The script creates:
-
-```text
-data/X_train.csv
-data/X_test.csv
-data/y_train.csv
-data/y_test.csv
-```
-
-### Step 5 - Train the XGBoost Model
-
-Run:
-
-```bash
-python train_xgboost.py
-```
-
-The training script generates the model artifact required by the dashboard.
-
-Expected model location:
-
-```text
-models/xgboost_model.joblib
-```
-
-The saved artifact must contain the trained classifier and its required feature names.
-
-### Step 6 - Optional Model Comparison
-
-To reproduce the model comparison workflow, run:
-
-```bash
-python train_decision_tree.py
-python train_random_forest.py
-python compare_models.py
-```
-
-### Step 7 - Model Validation
-
-Run:
-
-```bash
-python validate_model.py
-```
-
-To perform the project's data leakage checks, run:
-
-```bash
-python check_data_leakage.py
-```
-
-These scripts help evaluate the model and investigate potential overlap between the training and testing datasets.
-
-## Running the Flask Application
-
-### Step 1 - Configure the Flask Secret Key
-
-The Flask application requires the following environment variable:
-
-```text
-FLASK_SECRET_KEY
-```
-
-In Windows PowerShell, generate a random secret key:
-
-```powershell
-$env:FLASK_SECRET_KEY = python -c "import secrets; print(secrets.token_hex(32))"
-```
-
-This sets the key for the current PowerShell session.
-
-Do not publish or commit secret keys to GitHub.
-
-On macOS or Linux, use:
-
-```bash
-export FLASK_SECRET_KEY="$(python -c 'import secrets; print(secrets.token_hex(32))')"
-```
-
-### Step 2 - Start Flask
-
-Run:
-
-```bash
-python app.py
-```
-
-The application starts a local development server.
-
-### Step 3 - Open the Dashboard
-
-Open a browser and visit:
-
-http://127.0.0.1:5000
-
-### Step 4 - Upload Network Traffic Data
-
-Upload a CSV file containing the required 78 network traffic features.
-
-The application validates the uploaded file before making predictions.
-
-### Step 5 - View Results
-
-The dashboard displays:
-
-- Total network flows
-- BENIGN traffic count
-- ATTACK traffic count
-- Prediction percentages
-- Traffic distribution chart
-- Potential attack alerts
-
-### Step 6 - Download Predictions
-
-Click the dashboard's download button to export the individual prediction results as a CSV file.
-
-## Validation and Testing
-
-Model evaluation was performed on 27,137 saved test records.
-
-Additional checks included:
-
-- Duplicate training records
-- Duplicate testing records
-- Exact train/test feature overlap
-- Rounded feature overlap
-- Missing values
-- Required model features
-- Missing-feature CSV uploads
-- Empty CSV uploads
-- Nonnumeric CSV uploads
-
-## Data Leakage Investigation
-
-The investigation produced the following results:
+### Investigation Results
 
 | Check | Result |
 |---|---:|
-| Training rows | 108,547 |
-| Testing rows | 27,137 |
 | Duplicate training feature rows | 0 |
 | Duplicate testing feature rows | 0 |
-| Exact train/test overlap | 0 |
+| Exact train/test feature overlap | 0 |
 | Rounded feature overlap | 129 |
-| Missing training values | 0 |
-| Missing testing values | 0 |
-| Model feature count | 78 |
-| Missing model features | 0 |
 
-### Interpretation
+The 129 rounded feature matches do not automatically
+indicate data leakage.
 
-No exact duplicate feature rows were detected across the saved training and testing datasets.
+However, related network sessions or capture periods
+may appear in both training and testing datasets.
 
-However, 129 test records matched training records after numeric rounding.
+Further session-independent evaluation is required
+to assess model generalization.
 
-Rounded matches do not automatically establish data leakage.
+---
 
-The current evaluation uses a stratified random row split.
+## 12. Project Structure
 
-Related network sessions or capture periods may therefore appear in both training and testing datasets.
+    ML_Network_IDS/
+    |
+    |-- app.py
+    |-- analyze_data.py
+    |-- check_data_leakage.py
+    |-- check_data_quality.py
+    |-- compare_models.py
+    |-- count_attacks.py
+    |-- explore_data.py
+    |-- main.py
+    |-- preprocess_data.py
+    |-- split_data.py
+    |-- train_decision_tree.py
+    |-- train_random_forest.py
+    |-- train_xgboost.py
+    |-- validate_model.py
+    |
+    |-- data/
+    |-- models/
+    |-- reports/
+    |-- exports/
+    |
+    |-- screenshots/
+    |   |-- dashboard_home.png
+    |   |-- prediction_results.png
+    |   |-- attack_alert.png
+    |
+    |-- templates/
+    |   |-- index.html
+    |
+    |-- static/
+    |   |-- style.css
+    |
+    |-- tests/
+    |   |-- test_app.py
+    |
+    |-- .gitignore
+    |-- README.md
+    |-- requirements.txt
 
-These checks do not rule out session-level, temporal, preprocessing, or model-selection leakage.
+### Important Repository Notes
 
-Independent capture-session evaluation is recommended before making claims about real-world detection performance.
+The following files are excluded from GitHub:
 
-## Security Considerations
+- Raw and processed datasets.
+- Trained model files.
+- Generated prediction exports.
+- Virtual environments.
+- Temporary testing files.
+- Local backup files.
+- Sensitive environment configuration.
 
-The application includes basic security measures for local development.
+The model artifact must be generated locally
+or provided separately before running the dashboard.
 
-These include:
+---
 
-- Environment-based Flask secret key
-- Disabled Flask debug mode
-- Restricted upload size
-- CSV file extension checks
-- Required feature validation
-- Numerical input validation
-- Maximum prediction row limit
-- Exclusion of local datasets and generated files from Git
+## 13. Installation and Setup
 
-The application is intended for local demonstration and educational use.
+### Step 1: Clone the Repository
 
-It is not currently designed for production security monitoring.
+    git clone https://github.com/PriyankaSridhar17/ML-Based-Network-Intrusion-Detection-System.git
 
-Additional security hardening would be required before deployment in a public or multi-user environment.
+### Step 2: Open the Project Directory
 
-## Limitations
+    cd ML-Based-Network-Intrusion-Detection-System
 
-- The model was trained and evaluated using a sampled CICIDS2017 dataset.
-- Random row splitting does not guarantee independent network-session evaluation.
-- The reported accuracy may overestimate performance on unseen network environments.
-- The system does not currently analyze live network packets.
-- The dashboard requires precomputed network flow features.
-- The trained XGBoost model is not included in the GitHub repository.
-- Users must reproduce the training pipeline to generate the model.
+### Step 3: Create a Virtual Environment
+
+    python -m venv .venv
+
+### Step 4: Activate the Virtual Environment
+
+Windows PowerShell:
+
+    .\.venv\Scripts\Activate.ps1
+
+### Step 5: Install Dependencies
+
+    python -m pip install -r requirements.txt
+
+### Step 6: Configure the Flask Secret Key
+
+Set a secure secret key in your PowerShell session:
+
+    $env:FLASK_SECRET_KEY = python -c "import secrets; print(secrets.token_hex(32))"
+
+The key should be provided through the environment
+rather than hardcoded into the application.
+
+### Step 7: Provide the Trained Model
+
+The Flask application requires a compatible trained
+XGBoost model at:
+
+    models/xgboost_model.joblib
+
+The saved model must be compatible with the
+application's required network features.
+
+If the model is not available, it must be generated
+using the project's training pipeline.
+
+### Step 8: Start the Flask Application
+
+    python app.py
+
+### Step 9: Open the Dashboard
+
+Open the following address in your browser:
+
+http://127.0.0.1:5000
+
+### Step 10: Upload Network Traffic Data
+
+Upload a compatible CSV containing the required
+78 network traffic features.
+
+The dashboard will display classification results
+and allow prediction results to be downloaded.
+
+---
+
+## 14. Model Validation
+
+Model evaluation was performed using the saved
+test dataset.
+
+Validation activities included:
+
+- Accuracy evaluation.
+- Precision evaluation.
+- Recall evaluation.
+- F1-score evaluation.
+- Confusion matrix analysis.
+- Feature importance analysis.
+- Duplicate record checks.
+- Train/test overlap investigation.
+- Input feature consistency checks.
+
+These evaluations provide an initial assessment
+of model behavior on the sampled CICIDS2017 dataset.
+
+---
+
+## 15. Security Considerations
+
+The application is intended for local development
+and academic demonstration.
+
+Current security-related practices include:
+
+- Environment-based Flask secret key configuration.
+- Flask debug mode disabled.
+- Localhost-only application binding.
+- CSV upload validation.
+- File upload size limits.
+- Required feature validation.
+- Temporary testing file exclusions.
+- Sensitive file exclusions through .gitignore.
+
+Additional hardening is required before deployment
+on a publicly accessible server.
+
+---
+
+## 16. Project Limitations
+
+- The model was evaluated on sampled CICIDS2017 data.
+- Random row splitting does not ensure session independence.
+- The model has not been independently validated on live traffic.
+- The dashboard processes uploaded CSV files rather than live packets.
 - Predictions are not confirmed security incidents.
-- The Flask application is intended for local demonstration.
-- The current application does not provide per-user prediction result isolation.
-- Additional testing and security hardening are required before production deployment.
+- The trained model is not included in the public repository.
+- Automated tests cover selected application behaviors only.
+- Public deployment requires additional security hardening.
+- Per-user prediction result isolation requires improvement.
 
-## Future Improvements
+---
 
-- Evaluate the model on independent network capture sessions.
-- Perform stronger cross-session generalization testing.
-- Add automated unit and integration tests.
-- Improve model reproducibility and experiment tracking.
-- Implement per-user prediction result isolation.
-- Improve Flask deployment security.
-- Explore real-time network traffic ingestion.
-- Add additional network security visualizations.
-- Improve attack investigation and reporting capabilities.
+## 17. Future Improvements
 
-## Project Status
+Planned improvements include:
 
-The following development activities have been completed:
+1. Independent capture-session model evaluation.
+2. Stronger model generalization testing.
+3. Expanded automated test coverage.
+4. Improved Flask deployment security.
+5. Per-user prediction result isolation.
+6. Additional network security visualizations.
+7. Improved attack investigation and reporting.
+8. Exploration of real-time traffic ingestion.
+9. Improved reproducibility and deployment documentation.
 
-- Dataset preprocessing
-- Binary label generation
-- Training and testing dataset creation
-- Decision Tree model training
-- Random Forest model training
-- XGBoost model training
-- Model comparison
-- Initial model evaluation
-- Data leakage investigation
-- Flask dashboard development
-- CSV input validation
-- Prediction visualization
-- CSV prediction export
-- Git repository initialization
-- Initial Git commit
+---
 
-Independent network-session validation, automated testing, and production security hardening remain future work.
+## 18. Project Progress
 
-## Author
+### Completed
+
+- Dataset sampling and preprocessing.
+- Exploratory data analysis.
+- Decision Tree model development.
+- Random Forest model development.
+- XGBoost model development.
+- Model comparison and evaluation.
+- Confusion matrix analysis.
+- Feature importance analysis.
+- Data leakage investigation.
+- Flask dashboard development.
+- CSV upload validation.
+- Prediction result visualization.
+- Prediction CSV export.
+- GitHub repository publication.
+- Dashboard screenshot documentation.
+- Nine passing automated Flask application tests.
+
+### Ongoing
+
+- Independent model evaluation.
+- Application security improvements.
+- Additional automated testing.
+- Deployment and reproducibility improvements.
+
+---
+
+## 19. Author
 
 **Priyanka Sridhar**
 
-Machine Learning | Network Security | Network Intrusion Detection
+Master's in Computer Engineering  
+California State University, Fullerton
 
-GitHub:
+**Areas of Interest:**
+
+- Network Engineering
+- Network Security
+- Machine Learning
+- Network Intrusion Detection
+- IT Infrastructure
+
+**GitHub:**
 https://github.com/PriyankaSridhar17
 
-## Disclaimer
+---
 
-This project is intended for educational, research, and portfolio demonstration purposes.
+## 20. Disclaimer
 
-Machine learning predictions should not be treated as confirmed security incidents without additional investigation.
+This project is intended for academic research,
+learning, and demonstration purposes.
 
-The reported evaluation metrics describe performance on the project's saved test dataset and do not establish performance in live or independent network environments.
+The reported evaluation metrics describe performance
+on the project's saved test dataset.
+
+They do not establish performance in live,
+independent, or production network environments.
+
+Machine learning predictions should not be treated
+as confirmed security incidents without additional
+investigation.
