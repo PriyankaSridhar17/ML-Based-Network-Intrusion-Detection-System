@@ -1,0 +1,37 @@
+{
+    "experiment": "Day 15 source-file holdout",
+    "dataset": "CICIDS2017",
+    "training_source_files": [
+        "Friday-WorkingHours-Afternoon-PortScan.pcap_ISCX.csv",
+        "Friday-WorkingHours-Morning.pcap_ISCX.csv",
+        "Monday-WorkingHours.pcap_ISCX.csv",
+        "Thursday-WorkingHours-Afternoon-Infilteration.pcap_ISCX.csv",
+        "Thursday-WorkingHours-Morning-WebAttacks.pcap_ISCX.csv",
+        "Tuesday-WorkingHours.pcap_ISCX.csv",
+        "Wednesday-workingHours.pcap_ISCX.csv"
+    ],
+    "held_out_source_file": "Friday-WorkingHours-Afternoon-DDos.pcap_ISCX.csv",
+    "sample_fraction": 0.05,
+    "random_state": 42,
+    "training_records": 124492,
+    "testing_records": 11287,
+    "feature_count": 78,
+    "evaluation_type": "Unseen DDoS attack category evaluation",
+    "metrics": {
+        "Accuracy": 0.7830247187029326,
+        "Precision": 0.9994946942900454,
+        "Recall": 0.6178353896610964,
+        "F1_Score": 0.7636328539716244,
+        "True_Negatives": 4882,
+        "False_Positives": 2,
+        "False_Negatives": 2447,
+        "True_Positives": 3956,
+        "Test_Records": 11287
+    },
+    "limitations": [
+        "Source-file holdout is not a guarantee of independent network sessions.",
+        "DDoS is absent from the training labels.",
+        "Results are based on sampled CICIDS2017 network traffic.",
+        "This is not live-network validation."
+    ]
+}

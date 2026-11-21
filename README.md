@@ -668,3 +668,98 @@ independent, or production network environments.
 Machine learning predictions should not be treated
 as confirmed security incidents without additional
 investigation.
+
+
+
+---
+
+## Day 15 — Independent Source-File Validation
+
+### Objective
+
+Evaluate whether an XGBoost intrusion detection classifier
+can identify malicious traffic from a held-out CICIDS2017
+capture containing an attack category absent from training.
+
+### Experimental Design
+
+- Dataset: CICIDS2017
+- Training: Seven original source CSV files
+- Testing: Friday Afternoon DDoS capture
+- Model: Separately trained XGBoost classifier
+- Sampling: 5% of each source file
+- Features: 78 network traffic characteristics
+- Training records: 124,492
+- Testing records: 11,287
+- Overlapping source files: 0
+
+The original trained model and Flask dashboard were
+preserved without modification.
+
+### Experimental Results
+
+| Metric | Result |
+|---|---:|
+| Accuracy | 78.30% |
+| Precision | 99.95% |
+| Recall | 61.78% |
+| F1-score | 76.36% |
+| True Negatives | 4,882 |
+| False Positives | 2 |
+| False Negatives | 2,447 |
+| True Positives | 3,956 |
+
+### Confusion Matrix
+
+![Day 15 Confusion Matrix](experiments/day15/confusion_matrix.png)
+
+### Interpretation
+
+The experimental classifier achieved high precision,
+but detected only 61.78% of the DDoS attack records.
+
+Of 6,403 actual DDoS records, 2,447 were incorrectly
+classified as BENIGN.
+
+This indicates limited recall for the previously unseen
+DDoS attack category in the held-out capture.
+
+### Comparison with Original Baseline
+
+| Metric | Random-Split Baseline | Day 15 Holdout |
+|---|---:|---:|
+| Accuracy | 99.87% | 78.30% |
+| Precision | 99.62% | 99.95% |
+| Recall | 99.68% | 61.78% |
+| F1-score | 99.65% | 76.36% |
+
+These evaluations are not directly controlled comparisons.
+They use different training and testing distributions and
+potentially different XGBoost hyperparameters.
+
+The difference does not establish data leakage in the
+original experiment.
+
+### Limitations
+
+- The experiment used sampled CICIDS2017 traffic.
+- Source-file separation does not guarantee complete
+  independence between network sessions.
+- DDoS was absent from the training attack categories.
+- The results do not establish live-network performance.
+- Additional capture-based validation is necessary.
+
+### Research Artifacts
+
+- [Validation script](experiments/day15/independent_validation.py)
+- [Evaluation metrics](experiments/day15/validation_metrics.csv)
+- [Classification report](experiments/day15/classification_report.txt)
+- [Experiment summary](experiments/day15/experiment_summary.json)
+
+### Future Work
+
+- Evaluate additional held-out attack categories.
+- Investigate false-negative patterns.
+- Perform threshold tuning using separate validation data.
+- Compare models under controlled experimental conditions.
+- Explore independent capture-session evaluation.

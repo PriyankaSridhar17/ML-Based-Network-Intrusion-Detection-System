@@ -1,0 +1,2 @@
+Accuracy,Precision,Recall,F1_Score,True_Negatives,False_Positives,False_Negatives,True_Positives,Test_Records
+0.7830247187029326,0.9994946942900454,0.6178353896610964,0.7636328539716244,4882,2,2447,3956,11287
