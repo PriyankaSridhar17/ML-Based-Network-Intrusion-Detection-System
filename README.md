@@ -868,3 +868,108 @@ traffic patterns, but do not establish causation.
 - Evaluate class imbalance mitigation strategies.
 - Compare experimental models under controlled conditions.
 - Test generalization across additional held-out captures.
+
+
+---
+
+## Day 17 — Source-Separated Unseen-Attack Validation
+
+### Objective
+
+Investigate whether class weighting and classification
+threshold adjustments improve XGBoost attack detection
+on CICIDS2017 source captures excluded from training.
+
+### Experimental Design
+
+- Training sources: 5 CICIDS2017 CSV files
+- Validation sources: 2 separate CSV files
+- Training records: 89,052
+- Validation records: 36,198
+- Input features: 78
+- Model: XGBoost binary classifier
+- Classification thresholds: 0.30, 0.50, 0.70
+- Class weights: 1.0 and 7.7641
+
+The Friday afternoon DDoS capture was excluded from
+training and validation.
+
+### Validation Attack Categories
+
+The validation sources contain:
+
+- PortScan
+- FTP-Patator
+- SSH-Patator
+
+These attack categories were absent from the training
+source files.
+
+This experiment therefore investigates generalization
+to previously unseen attack categories.
+
+### Selected Validation Configuration
+
+| Metric | Result |
+|---|---:|
+| Configuration | Balanced XGBoost |
+| Class weight | 7.7641 |
+| Classification threshold | 0.30 |
+| Accuracy | 75.68% |
+| Precision | 12.39% |
+| Recall | 0.324% |
+| F1-score | 0.632% |
+| False positives | 198 |
+| False negatives | 8,604 |
+| True positives | 28 |
+
+The selected configuration achieved the highest F1-score
+among the six evaluated configurations.
+
+However, all configurations exhibited extremely low
+attack recall.
+
+### Research Findings
+
+1. Source-separated validation exposed substantial
+   generalization limitations.
+
+2. The selected model detected only 28 of 8,632
+   actual attack records.
+
+3. Increasing the positive-class weight produced
+   a small recall increase but also increased
+   false positives.
+
+4. Lowering the classification threshold did not
+   meaningfully resolve the detection problem.
+
+5. The results do not establish improved performance
+   on unseen DDoS traffic.
+
+### Limitations
+
+- Validation used two source captures.
+- Validation attack categories were absent from training.
+- Class weighting and thresholds were evaluated using
+  the same validation dataset.
+- Selecting the best configuration on this dataset
+  introduces model-selection bias.
+- Exact feature-duplicate filtering does not guarantee
+  complete network-session independence.
+- No independent final evaluation of the selected
+  configuration was performed.
+
+### Research Artifacts
+
+- [Validation experiment](experiments/day17/validation_optimization.py)
+- [Validation comparison](experiments/day17/validation_comparison.csv)
+- [Experiment summary](experiments/day17/validation_summary.json)
+
+### Future Research
+
+- Design a separate known-attack validation experiment.
+- Investigate capture-session-level data separation.
+- Evaluate additional attack categories.
+- Compare class-weighting strategies.
+- Assess generalization on new independent captures.

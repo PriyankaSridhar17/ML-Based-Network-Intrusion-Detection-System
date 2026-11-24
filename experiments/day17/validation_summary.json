@@ -1,0 +1,28 @@
+﻿{
+    "experiment":  "Day 17 validation optimization",
+    "training_sources":  [
+                             "Friday-WorkingHours-Morning.pcap_ISCX.csv",
+                             "Monday-WorkingHours.pcap_ISCX.csv",
+                             "Thursday-WorkingHours-Afternoon-Infilteration.pcap_ISCX.csv",
+                             "Thursday-WorkingHours-Morning-WebAttacks.pcap_ISCX.csv",
+                             "Wednesday-workingHours.pcap_ISCX.csv"
+                         ],
+    "validation_sources":  [
+                               "Friday-WorkingHours-Afternoon-PortScan.pcap_ISCX.csv",
+                               "Tuesday-WorkingHours.pcap_ISCX.csv"
+                           ],
+    "excluded_holdout":  "Friday-WorkingHours-Afternoon-DDos.pcap_ISCX.csv",
+    "training_records":  89052,
+    "validation_records":  36198,
+    "class_weight_ratio":  7.764098021848243,
+    "selection_criterion":  "validation F1-score",
+    "selected_configuration":  "balanced",
+    "selected_threshold":  0.3,
+    "selected_validation_f1":  0.006321968841724994,
+    "limitations":  [
+                        "Validation attack categories were absent from the training source files.",
+                        "Validation is based on two source captures.",
+                        "Results do not establish DDoS generalization.",
+                        "The held-out DDoS capture was not used for tuning."
+                    ]
+}
