@@ -1,0 +1,12 @@
+{
+    "experiment": "Day 16 false-negative analysis",
+    "threshold": 0.5,
+    "test_records": 11287,
+    "true_negatives": 4882,
+    "false_positives": 2,
+    "false_negatives": 2447,
+    "true_positives": 3956,
+    "attack_recall": 0.6178353896610964,
+    "day15_reproduced": true,
+    "note": "Held-out test data used for diagnostic analysis only, not threshold selection."
+}

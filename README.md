@@ -763,3 +763,108 @@ original experiment.
 - Perform threshold tuning using separate validation data.
 - Compare models under controlled experimental conditions.
 - Explore independent capture-session evaluation.
+
+
+---
+
+## Day 16 — False-Negative Investigation
+
+### Objective
+
+Investigate why the experimental XGBoost classifier
+failed to identify 2,447 DDoS attack records during
+the Day 15 source-file holdout evaluation.
+
+### Methodology
+
+- Reconstructed the original Day 15 held-out test sample.
+- Loaded the previously trained experimental XGBoost model.
+- Reproduced the original confusion matrix.
+- Analyzed predicted ATTACK scores.
+- Compared traffic features between missed and detected attacks.
+- Preserved the original classification threshold of 0.50.
+
+No model retraining or threshold optimization was performed.
+
+### Reproduced Evaluation Results
+
+| Metric | Result |
+|---|---:|
+| Test records | 11,287 |
+| True negatives | 4,882 |
+| False positives | 2 |
+| False negatives | 2,447 |
+| True positives | 3,956 |
+| Attack recall | 61.78% |
+
+### Prediction Score Analysis
+
+| Outcome | Records | Mean score | Median score |
+|---|---:|---:|---:|
+| False Negative | 2,447 | 0.01990 | 0.00175 |
+| False Positive | 2 | 0.67412 | 0.67412 |
+| True Negative | 4,882 | 0.00233 | 0.000099 |
+| True Positive | 3,956 | 0.78993 | 0.75937 |
+
+Missed DDoS attacks received substantially lower
+ATTACK scores than correctly detected attacks.
+
+This suggests that many missed attacks were classified
+as strongly BENIGN-like by the experimental model,
+rather than narrowly falling below the 0.50 threshold.
+
+### Feature Comparison
+
+| Feature | False Negative Median | True Positive Median |
+|---|---:|---:|
+| Flow Bytes/s | 4.56 | 10,806.70 |
+| Flow Packets/s | 0.76 | 7.55 |
+| Total Backward Packets | 0 | 5 |
+| Average Packet Size | 7.5 | 1,292.56 |
+| Bwd Packet Length Std | 0 | 3,173.37 |
+
+The missed attacks exhibited lower median flow rates,
+packet sizes, and backward packet activity.
+
+These observations suggest possible differences in
+traffic patterns, but do not establish causation.
+
+### Attack Score Visualization
+
+![Day 16 Attack Score Distribution](experiments/day16/attack_score_distribution.png)
+
+### Research Findings
+
+1. The Day 15 confusion matrix was successfully reproduced.
+2. The experimental classifier missed 2,447 DDoS records.
+3. Missed attacks had very low median ATTACK scores.
+4. Descriptive feature differences were observed between
+   missed and correctly detected attacks.
+5. Threshold adjustment alone may not address all
+   generalization limitations.
+
+### Limitations
+
+- Analysis was performed on sampled CICIDS2017 traffic.
+- The held-out capture contains an attack category absent
+  from the experimental training data.
+- Prediction scores are not necessarily calibrated probabilities.
+- Feature comparisons are descriptive, not causal.
+- The held-out test data was not used to select a new threshold.
+- Results do not establish performance on live network traffic.
+
+### Day 16 Research Artifacts
+
+- [False-negative analysis script](experiments/day16/false_negative_analysis.py)
+- [Analysis summary](experiments/day16/analysis_summary.json)
+- [Attack score statistics](experiments/day16/score_summary.csv)
+- [Feature comparison](experiments/day16/feature_comparison.csv)
+- [Attack score visualization](experiments/day16/attack_score_distribution.png)
+
+### Next Steps
+
+- Investigate training-data distribution differences.
+- Design a separate validation set for threshold selection.
+- Evaluate class imbalance mitigation strategies.
+- Compare experimental models under controlled conditions.
+- Test generalization across additional held-out captures.

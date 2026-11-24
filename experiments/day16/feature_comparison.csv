@@ -1,0 +1,8 @@
+Feature,FalseNegativeMedian,TruePositiveMedian
+Flow Duration,6056263.0,1076462.0
+Flow Bytes/s,4.555928349,10806.70428
+Flow Packets/s,0.758169657,7.54771497
+Total Fwd Packets,4.0,3.0
+Total Backward Packets,0.0,5.0
+Average Packet Size,7.5,1292.555556
+Bwd Packet Length Std,0.0,3173.373883
