@@ -1,0 +1,29 @@
+﻿{
+    "experiment":  "Day 18 known-attack validation",
+    "dataset":  "Wednesday-workingHours.pcap_ISCX.csv",
+    "validation_type":  "Within-capture stratified random split",
+    "sample_fraction":  0.05,
+    "random_state":  42,
+    "total_records_after_filtering":  31548,
+    "training_records":  25238,
+    "validation_records":  6310,
+    "excluded_rare_categories":  [
+                                     "Heartbleed"
+                                 ],
+    "class_weight_ratio":  2.1602804908590034,
+    "selected_configuration":  "standard",
+    "selected_threshold":  0.5,
+    "selected_validation_f1":  0.9992483086945627,
+    "limitations":  [
+                        "Training and validation use the same capture.",
+                        "Related network flows may appear in both subsets.",
+                        "Exact duplicate feature records were removed.",
+                        "Rare categories with fewer than five sampled records were excluded.",
+                        "Results do not establish independent-session generalization.",
+                        "The Friday DDoS holdout was not used."
+                    ],
+    "joint_best_configurations":  [
+                                      "standard: threshold 0.50",
+                                      "balanced: threshold 0.70"
+                                  ]
+}

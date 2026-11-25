@@ -973,3 +973,75 @@ attack recall.
 - Evaluate additional attack categories.
 - Compare class-weighting strategies.
 - Assess generalization on new independent captures.
+
+
+---
+
+## Day 18 — Known-Attack Validation
+
+### Objective
+
+Evaluate XGBoost performance on familiar attack categories
+using a stratified training-validation split within the
+Wednesday CICIDS2017 capture.
+
+### Experimental Setup
+
+- Dataset: Wednesday CICIDS2017 capture
+- Features: 78 network traffic characteristics
+- Training records: 25,238
+- Validation records: 6,310
+- Training/validation split: 80/20
+- Models: Standard and class-weighted XGBoost
+- Thresholds evaluated: 0.30, 0.50, 0.70
+- Rare-category exclusion: 1 Heartbleed record
+
+Exact duplicate feature records were removed before splitting.
+
+### Best Validation Results
+
+| Metric | Result |
+|---|---:|
+| Accuracy | 99.9525% |
+| Precision | 100.0000% |
+| Recall | 99.8498% |
+| F1-score | 99.9248% |
+| True negatives | 4,313 |
+| False positives | 0 |
+| False negatives | 3 |
+| True positives | 1,994 |
+
+Two configurations achieved the same reported best F1-score:
+
+- Standard XGBoost at threshold 0.50
+- Balanced XGBoost at threshold 0.70
+
+### Research Interpretation
+
+The experimental classifiers performed strongly on known
+attack categories from the same source capture.
+
+However, these results do not establish independent
+network-session generalization.
+
+The earlier Day 15 and Day 17 experiments showed much
+lower recall on attack categories excluded from training.
+
+These experiments use different datasets and evaluation
+designs and should not be interpreted as direct evidence
+of model improvement.
+
+### Limitations
+
+- Training and validation used the same source capture.
+- Related network flows may appear in both subsets.
+- Exact duplicate removal does not eliminate all leakage risks.
+- The single sampled Heartbleed record was excluded.
+- The best configuration was selected using validation results.
+- No independent final test was performed for this configuration.
+
+### Research Artifacts
+
+- [Known-attack validation script](experiments/day18/known_attack_validation.py)
+- [Model comparison](experiments/day18/known_attack_comparison.csv)
+- [Experiment summary](experiments/day18/known_attack_summary.json)
