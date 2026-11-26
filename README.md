@@ -1045,3 +1045,131 @@ of model improvement.
 - [Known-attack validation script](experiments/day18/known_attack_validation.py)
 - [Model comparison](experiments/day18/known_attack_comparison.csv)
 - [Experiment summary](experiments/day18/known_attack_summary.json)
+
+
+---
+
+## Day 19 — Controlled XGBoost Model Comparison
+
+### Objective
+
+Investigate whether changing XGBoost model complexity
+improves known-attack classification performance under
+consistent experimental conditions.
+
+### Dataset and Methodology
+
+Dataset: CICIDS2017 Wednesday capture.
+
+- Network features: 78
+- Cleaned records: 31,548
+- Training records: 18,928
+- Validation records: 6,310
+- Supplementary evaluation records: 6,310
+- Split: Stratified 60/20/20
+- Classification threshold: 0.50
+- Class weight: 1.0
+- Random state: 42
+
+Exact duplicate feature records were removed before
+splitting the dataset.
+
+The single sampled Heartbleed record was excluded
+because it could not support stratified evaluation.
+
+### Model Configurations
+
+| Model | Max Depth | Estimators |
+|---|---:|---:|
+| Baseline | 5 | 150 |
+| Shallow | 3 | 150 |
+| Deep | 7 | 150 |
+| More Trees | 5 | 250 |
+
+All configurations used the same training and validation
+subsets and consistent evaluation parameters.
+
+### Validation Results
+
+| Model | F1-score | Recall | False Positives |
+|---|---:|---:|---:|
+| Baseline | 99.8249% | 99.9499% | 6 |
+| Shallow | 99.7998% | 99.8998% | 6 |
+| Deep | 99.8498% | 99.9499% | 5 |
+| More Trees | 99.8499% | 100.0000% | 6 |
+
+The More Trees configuration achieved the highest
+validation F1-score.
+
+However, the difference between the Deep and More Trees
+configurations was negligible.
+
+### Selected Configuration
+
+- Algorithm: XGBoost
+- Maximum depth: 5
+- Number of estimators: 250
+- Learning rate: 0.1
+- Classification threshold: 0.50
+- Class weight: 1.0
+
+The selected configuration was evaluated separately
+on the supplementary evaluation subset.
+
+### Supplementary Evaluation Results
+
+| Metric | Result |
+|---|---:|
+| Accuracy | 99.9208% |
+| Precision | 99.8998% |
+| Recall | 99.8498% |
+| F1-score | 99.8748% |
+| True Negatives | 4,311 |
+| False Positives | 2 |
+| False Negatives | 3 |
+| True Positives | 1,994 |
+
+### Research Findings
+
+1. All four configurations achieved high performance
+   on the within-capture validation subset.
+
+2. Increasing the number of trees produced only a
+   negligible improvement in validation F1-score.
+
+3. The selected model achieved similarly high
+   performance on the supplementary evaluation subset.
+
+4. These findings do not demonstrate improved
+   independent-capture generalization.
+
+5. More complex models are not necessarily better
+   for intrusion detection.
+
+### Experimental Limitations
+
+- All subsets originated from the same Wednesday capture.
+- Related network flows may cross split boundaries.
+- The Wednesday capture was used in earlier experiments.
+- Supplementary evaluation is not a fully untouched test.
+- Model selection was based on validation F1-score.
+- The Friday DDoS holdout was excluded.
+- Results do not establish performance on unseen attacks
+  or independent network captures.
+
+### Day 19 Research Artifacts
+
+- [Model comparison script](experiments/day19/model_comparison.py)
+- [Validation comparison](experiments/day19/model_comparison.csv)
+- [Selected model evaluation](experiments/day19/selected_model_evaluation.csv)
+- [Experiment summary](experiments/day19/model_comparison_summary.json)
+
+### Conclusion
+
+Controlled hyperparameter comparisons showed that
+increasing XGBoost complexity provided little additional
+benefit on the known-attack validation dataset.
+
+Further research should prioritize independent-capture
+evaluation, generalization, and reliable attack detection
+rather than maximizing within-capture accuracy.
