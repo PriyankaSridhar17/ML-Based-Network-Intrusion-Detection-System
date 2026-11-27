@@ -1,0 +1,35 @@
+DAY 20 - CONSOLIDATED RESEARCH EVALUATION
+============================================================
+
+This report summarizes the existing experimental
+results without retraining any classifiers.
+
+                       experiment                         evaluation_type                                   source_report  test_records  accuracy  precision   recall  f1_score  true_negatives  false_positives  false_negatives  true_positives
+       Day 11 - Original Baseline                        Random row split            reports\day11_validation_metrics.csv         27137  0.998710   0.996153 0.996759  0.996456           22182               19               16            4920
+           Day 15 - Held-out DDoS          Source-separated unseen attack        experiments\day15\validation_metrics.csv         11287  0.783025   0.999495 0.617835  0.763633            4882                2             2447            3956
+Day 17 - Unseen Attack Validation             Source-separated validation     experiments\day17\validation_comparison.csv         36198  0.756837   0.123894 0.003244  0.006322           27368              198             8604              28
+ Day 18 - Known Attack Validation               Within-capture validation   experiments\day18\known_attack_comparison.csv          6310  0.999525   1.000000 0.998498  0.999248            4313                0                3            1994
+        Day 19 - Model Comparison Supplementary within-capture evaluation experiments\day19\selected_model_evaluation.csv          6310  0.999208   0.998998 0.998498  0.998748            4311                2                3            1994
+
+RESEARCH FINDINGS
+------------------------------------------------------------
+1. Within-capture known-attack evaluation produced high classification performance.
+2. Source-separated experiments exposed poor generalization to some unseen attacks.
+3. Day 16 showed many missed DDoS attacks received very low ATTACK scores.
+4. Increasing XGBoost complexity provided negligible within-capture improvement.
+5. The reported evaluations do not establish live-network or production performance.
+
+LIMITATIONS
+------------------------------------------------------------
+1. Experiments used different training data and model configurations.
+2. Within-capture splits may contain related flows.
+3. Source-file separation does not guarantee independent network sessions.
+4. Some configurations were selected using the reported validation datasets.
+5. The project has not been evaluated on independent live network traffic.
+
+CONCLUSION
+------------------------------------------------------------
+High within-capture performance did not guarantee
+strong recognition of attack categories excluded
+from training. Additional independent evaluation
+is required before production claims can be made.

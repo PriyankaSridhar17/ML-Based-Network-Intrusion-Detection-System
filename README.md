@@ -1173,3 +1173,93 @@ benefit on the known-attack validation dataset.
 Further research should prioritize independent-capture
 evaluation, generalization, and reliable attack detection
 rather than maximizing within-capture accuracy.
+
+
+---
+
+## Day 20 — Consolidated Model Evaluation
+
+### Objective
+
+Consolidate the evaluation results from the original
+XGBoost baseline and the Day 15–19 experiments.
+
+The consolidation uses saved research reports and
+does not retrain or modify existing classifiers.
+
+### Evaluation Summary
+
+| Experiment | Accuracy | Precision | Recall | F1-score |
+|---|---:|---:|---:|---:|
+| Day 11 — Original Baseline | 99.87% | 99.62% | 99.68% | 99.65% |
+| Day 15 — Held-out DDoS | 78.30% | 99.95% | 61.78% | 76.36% |
+| Day 17 — Unseen Attack Validation | 75.68% | 12.39% | 0.32% | 0.63% |
+| Day 18 — Known Attack Validation | 99.95% | 100.00% | 99.85% | 99.92% |
+| Day 19 — Model Comparison | 99.92% | 99.90% | 99.85% | 99.87% |
+
+### Evaluation Visualization
+
+![Consolidated Evaluation Comparison](experiments/day20/evaluation_comparison.png)
+
+### Key Research Findings
+
+1. The original random-split XGBoost baseline achieved
+   99.87% accuracy on its saved test dataset.
+
+2. The held-out DDoS experiment achieved 61.78% recall,
+   with 2,447 false-negative attack records.
+
+3. The Day 17 source-separated validation achieved
+   approximately 0.32% recall on attack categories
+   excluded from training.
+
+4. Within-capture known-attack validation achieved
+   approximately 99.85% recall.
+
+5. Increasing XGBoost model complexity provided only
+   negligible improvement in within-capture validation.
+
+### Interpretation
+
+High within-capture classification performance does
+not guarantee strong generalization to attack categories
+absent from training.
+
+The experiments used different training datasets,
+attack distributions, and model configurations.
+
+Therefore, their results should not be interpreted
+as a controlled comparison of one classifier.
+
+### Limitations
+
+- Some experiments used random within-capture splits.
+- Related network flows may appear across subsets.
+- Source-file separation does not guarantee complete
+  network-session independence.
+- Some model configurations were selected using
+  validation data.
+- The experiments used sampled CICIDS2017 traffic.
+- Independent live-network performance is unverified.
+
+### Research Artifacts
+
+- [Consolidated evaluation script](experiments/day20/final_evaluation.py)
+- [Consolidated metrics](experiments/day20/consolidated_metrics.csv)
+- [Evaluation report](experiments/day20/final_evaluation_report.txt)
+- [Research summary](experiments/day20/final_research_summary.json)
+
+### Conclusion
+
+The project demonstrates successful implementation
+of a machine learning-based network intrusion
+detection prototype.
+
+However, independent validation experiments reveal
+important limitations in detecting previously unseen
+attack patterns.
+
+Further work should prioritize model generalization,
+independent capture evaluation, and operational
+reliability rather than relying exclusively on
+high random-split accuracy.

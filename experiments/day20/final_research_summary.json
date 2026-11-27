@@ -1,0 +1,25 @@
+{
+    "project": "ML-Based Network Intrusion Detection System",
+    "evaluation_scope": "Days 11 and 15-19",
+    "comparison_is_controlled": false,
+    "experiment_count": 5,
+    "day16_false_negative_analysis": {
+        "false_negatives": 2447,
+        "attack_recall": 0.6178353896610964,
+        "day15_reproduced": true
+    },
+    "research_findings": [
+        "Within-capture known-attack evaluation produced high classification performance.",
+        "Source-separated experiments exposed poor generalization to some unseen attacks.",
+        "Day 16 showed many missed DDoS attacks received very low ATTACK scores.",
+        "Increasing XGBoost complexity provided negligible within-capture improvement.",
+        "The reported evaluations do not establish live-network or production performance."
+    ],
+    "limitations": [
+        "Experiments used different training data and model configurations.",
+        "Within-capture splits may contain related flows.",
+        "Source-file separation does not guarantee independent network sessions.",
+        "Some configurations were selected using the reported validation datasets.",
+        "The project has not been evaluated on independent live network traffic."
+    ]
+}
