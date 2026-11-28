@@ -41,6 +41,7 @@ data/
 # 5. Generated prediction exports
 # ------------------------------------------
 exports/
+exports_backup_day21/
 
 # ------------------------------------------
 # 6. Trained machine learning models

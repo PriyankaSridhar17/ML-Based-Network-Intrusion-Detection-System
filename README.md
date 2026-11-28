@@ -1263,3 +1263,64 @@ Further work should prioritize model generalization,
 independent capture evaluation, and operational
 reliability rather than relying exclusively on
 high random-split accuracy.
+
+
+---
+
+## Day 21 — Flask Dashboard Security and Reliability
+
+### Objective
+
+Improve the security and reliability of the Flask-based
+network intrusion detection dashboard while preserving
+the existing XGBoost model and prediction functionality.
+
+### Security Improvements
+
+- Validated original CSV headers before pandas parsing.
+- Added detection of duplicate CSV column names.
+- Rejected reserved prediction column names.
+- Added CSV formula-injection mitigation for exported text.
+- Preserved numeric network features during prediction.
+- Implemented 24-hour prediction export expiration.
+- Added controlled cleanup of expired generated exports.
+- Preserved unrelated files during cleanup.
+- Configured HTTPOnly and SameSite=Lax session cookies.
+- Added no-cache headers to prediction downloads.
+- Maintained the 10 MB upload and 50,000-row limits.
+
+### Automated Testing
+
+The Flask application passed 22 automated test cases.
+
+Tests covered:
+
+- Homepage and upload validation
+- Missing and malformed CSV inputs
+- Duplicate CSV headers
+- Reserved prediction columns
+- CSV export formula mitigation
+- Successful prediction and download
+- Export expiration and cleanup
+- Session-cookie configuration
+- Download cache headers
+- End-to-end protected CSV download
+
+Final test result: 22 passed, 0 failed.
+
+### Security Limitations
+
+- The dashboard is intended for local academic demonstration.
+- Spreadsheet formula mitigation is not guaranteed across all
+  spreadsheet applications.
+- The application has not undergone a comprehensive penetration test.
+- HTTPS-only session cookies are not enabled for local HTTP use.
+- Production deployment would require additional security controls.
+
+### Conclusion
+
+Day 21 improved application reliability and added safeguards
+for uploaded CSV data, prediction exports, session handling,
+and temporary file retention.
+
+All 22 automated tests passed after the improvements.
